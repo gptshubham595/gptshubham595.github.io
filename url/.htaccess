@@ -1,0 +1,12 @@
+
+
+# BEGIN YOURLS
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /url/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ /url/yourls-loader.php [L]
+</IfModule>
+# END YOURLS
+
