@@ -1,730 +1,898 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shubham Kumar Gupta | Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Shubham Kumar Gupta | Senior Android/NDK Engineer — Available for Contract</title>
+    <meta
+      name="description"
+      content="Senior Android/NDK engineer focused on performance, real-time audio, and mobile security. Available for freelance and contract work."
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <!-- Lucide Icons -->
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Alpine (for scroll nav state) -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-</head>
 
-<body>
-    <div id="tsparticles"></div>
+    <style>
+      :root {
+        --forest: #0a2619;
+        --cream: #fdf8f1;
+        --accent: #d97706;
+        --clay: #b45309;
+      }
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero section-padding">
-            <div class="profile-img-container reveal">
-                <img src="../photo.jpeg" alt="Shubham Kumar Gupta">
+      body {
+        font-family: "Outfit", sans-serif;
+        background-color: var(--cream);
+        color: var(--forest);
+        overflow-x: hidden;
+      }
+
+      /* Subtle texture */
+      .noise {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        content: "";
+        opacity: 0.04;
+        z-index: 9999;
+        pointer-events: none;
+        background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(10, 38, 25, 0.1);
+      }
+
+      .ticker-wrap {
+        display: flex;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .ticker-move {
+        display: inline-block;
+        animation: ticker 60s linear infinite;
+      }
+      @keyframes ticker {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      .gradient-text {
+        background: linear-gradient(135deg, #0a2619 0%, #b45309 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .floating {
+        animation: floating 4s ease-in-out infinite;
+      }
+      @keyframes floating {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+
+      .btn-magnetic {
+        transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .btn-magnetic:hover {
+        transform: scale(1.02) translateY(-2px);
+      }
+
+      /* A11y */
+      .skip-link {
+        position: absolute;
+        left: -999px;
+        top: 12px;
+        background: #fff;
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(10, 38, 25, 0.15);
+        z-index: 10000;
+      }
+      .skip-link:focus {
+        left: 12px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .floating,
+        .ticker-move {
+          animation: none !important;
+        }
+        .btn-magnetic,
+        * {
+          scroll-behavior: auto !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body id="top" class="min-h-screen flex flex-col">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="noise"></div>
+
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 w-full z-50 px-6 py-4"
+      x-data="{ scrolled: false }"
+      @scroll.window="scrolled = (window.pageYOffset > 20)"
+    >
+      <div
+        :class="scrolled ? 'glass-card py-3 px-6 rounded-full max-w-6xl mx-auto flex justify-between items-center transition-all duration-500 shadow-xl' : 'max-w-7xl mx-auto flex justify-between items-center py-4 transition-all duration-500'"
+        class="max-w-7xl mx-auto flex justify-between items-center py-4 transition-all duration-500"
+      >
+        <a href="#top" class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-[#0A2619] rounded-xl flex items-center justify-center text-white">
+            <i data-lucide="code-2" class="w-5 h-5"></i>
+          </div>
+          <span class="text-xl font-extrabold tracking-tighter">Shubham K. Gupta</span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-8 font-medium">
+          <a href="#about" class="hover:text-[#D97706] transition-colors">About</a>
+          <a href="#experience" class="hover:text-[#D97706] transition-colors">Experience</a>
+          <a href="#projects" class="hover:text-[#D97706] transition-colors">Projects</a>
+          <a href="#security" class="hover:text-[#D97706] transition-colors">Security</a>
+          <a href="#research" class="hover:text-[#D97706] transition-colors">Research</a>
+          <a
+            href="mailto:gptshubham595@gmail.com?subject=Project%20Inquiry"
+            class="bg-[#0A2619] text-white px-6 py-2.5 rounded-full btn-magnetic font-semibold"
+            >Discuss your project</a
+          >
+        </div>
+
+        <a
+          href="mailto:gptshubham595@gmail.com?subject=Project%20Inquiry"
+          class="md:hidden bg-[#0A2619] text-white p-2 rounded-lg"
+          aria-label="Email"
+        >
+          <i data-lucide="mail" class="w-6 h-6"></i>
+        </a>
+      </div>
+    </nav>
+
+    <main id="main" class="flex-grow">
+      <!-- Hero -->
+      <section class="relative pt-32 pb-20 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          <div class="z-10">
+            <div
+              class="inline-flex items-center gap-2 bg-[#D97706]/10 text-[#D97706] px-4 py-1.5 rounded-full text-sm font-bold mb-6"
+            >
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D97706] opacity-75"
+                ></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-[#D97706]"></span>
+              </span>
+              Senior Android / NDK Engineer · Available for Contract
             </div>
-            <h1 class="text-gradient reveal" style="transition-delay: 0.2s">Shubham Kumar Gupta</h1>
-            <p class="reveal" style="transition-delay: 0.4s">
-                Senior Mobile Developer at <span style="color:#fff; font-weight:500">Oracle</span> | Ex-<span
-                    style="color:#fff; font-weight:500">Ola Electric</span><br>
-                <span style="color:var(--blue-400)">3.5+ Years of Expertise</span> in High-Performance Android,
-                <span style="color:var(--indigo-400)">Technical Leadership</span> & <span
-                    style="color:var(--purple-400)">Security Research</span>
+
+            <p class="text-sm md:text-base font-semibold tracking-wider text-slate-500 uppercase mb-3">
+              I build fast, reliable Android apps that scale.
             </p>
-            <div class="cta-group reveal" style="transition-delay: 0.6s">
-                <div style="display:flex; gap:1rem; align-items:center">
-                    <a href="https://bit.ly/resumeshubhamola" target="_blank" class="btn-primary">
-                        <i data-lucide="file-text"></i> Resume
-                    </a>
-                    <div class="social-icons">
-                        <a href="https://www.linkedin.com/in/shubhamguptaggps" target="_blank"
-                            class="social-icon glass"><i data-lucide="linkedin"></i></a>
-                        <a href="https://github.com/gptshubham595/" target="_blank" class="social-icon glass"><i
-                                data-lucide="github"></i></a>
-                        <a href="https://www.youtube.com/c/pocexperts" target="_blank" class="social-icon glass"><i
-                                data-lucide="youtube"></i></a>
-                        <a href="mailto:gptshubham595@gmail.com" class="social-icon glass"><i
-                                data-lucide="mail"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="scroll-indicator reveal" style="transition-delay: 1s">
-                <div class="mouse">
-                    <div class="wheel"></div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Experience Section -->
-        <section id="experience" class="section-padding">
-            <div class="container" style="max-width: 900px;">
-                <div class="reveal" style="text-align: center; margin-bottom: 5rem;">
-                    <h2 class="text-gradient" style="font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem;">
-                        Professional Journey</h2>
-                    <p style="color: #64748b; font-weight: 300; max-width: 600px; margin: 0 auto;">Architecting
-                        high-performance systems and leading engineering initiatives across global technology leaders.
-                    </p>
-                </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.05] mb-8">
+              <span class="gradient-text">Shubham Kumar Gupta</span>
+            </h1>
 
-                <div class="timeline-container">
-                    <div class="timeline-line"></div>
+            <p class="text-xl text-slate-600 mb-10 max-w-xl leading-relaxed">
+              Senior Android engineer specializing in
+              <strong class="text-[#0A2619]">performance</strong>,
+              <strong class="text-[#0A2619]">real‑time audio (NDK/C++)</strong>, and
+              <strong class="text-[#0A2619]">mobile security</strong>.
+              Currently at <strong class="text-[#0A2619]">Oracle</strong>, previously
+              <strong class="text-[#0A2619]">Ola Electric</strong>. I help teams ship stable,
+              production‑grade apps—fast.
+            </p>
 
-                    <!-- Oracle -->
-                    <div class="experience-item">
-                        <div class="timeline-dot"></div>
-                        <div class="exp-content reveal-left">
-                            <div class="glass-card">
-                                <div class="exp-header">
-                                    <div class="exp-company-info">
-                                        <div class="company-logo">
-                                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg"
-                                                alt="Oracle">
-                                        </div>
-                                        <div>
-                                            <h3 class="exp-title">Senior Mobile Developer</h3>
-                                            <div class="exp-company">
-                                                Oracle
-                                                <a href="https://play.google.com/store/apps/details?id=org.oraclejet.maxapp&hl=en_IN"
-                                                    target="_blank"
-                                                    style="background: rgba(59,130,246,0.1); color: #93c5fd; padding: 2px 8px; border-radius: 99px; text-decoration: none; font-size: 9px; border: 1px solid rgba(59,130,246,0.2); display: flex; align-items: center; gap: 4px;">
-                                                    <i data-lucide="play" style="width:8px; fill: currentColor"></i>
-                                                    LIVE APP <i data-lucide="external-link" style="width:8px"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="exp-meta">
-                                        <div class="exp-meta-item"><i data-lucide="calendar" style="width:12px"></i> OCT
-                                            2025 - ONGOING</div>
-                                        <div class="exp-meta-item"><i data-lucide="map-pin" style="width:12px"></i>
-                                            BANGALORE, IN</div>
-                                    </div>
-                                </div>
-                                <ul class="exp-description">
-                                    <li>Architected state machine-based orchestration system managing 5+ parallel
-                                        workflows.</li>
-                                    <li>Implemented WebSocket audio streaming with chunked uploads, retry logic, and
-                                        background processing.</li>
-                                    <li>Engineered audio recording system using Oboe NDK (C++), reducing latency by 40%.
-                                    </li>
-                                    <li>Built 20+ complexity screens using Jetpack Compose with MVVM pattern.</li>
-                                    <li>Established CI/CD pipeline with 95% Code Coverage using Detekt & KtLint.</li>
-                                </ul>
-                                <div class="exp-footer">
-                                    <p
-                                        style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: #475569; font-weight: 700; margin-bottom: 0.75rem;">
-                                        Core Stack</p>
-                                    <div class="tech-tags">
-                                        <span class="tech-tag">KOTLIN</span><span class="tech-tag">OBOE NDK</span><span
-                                            class="tech-tag">COMPOSE</span><span class="tech-tag">WEBSOCKET</span><span
-                                            class="tech-tag">JENKINS</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a
+                href="mailto:gptshubham595@gmail.com?subject=Project%20Inquiry"
+                class="bg-[#0A2619] text-white px-8 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 hover:shadow-2xl hover:shadow-[#0A2619]/30 transition-all duration-300 btn-magnetic"
+              >
+                <i data-lucide="mail" class="w-5 h-5"></i>
+                Discuss your project
+              </a>
 
-                    <!-- Ola Electric -->
-                    <div class="experience-item">
-                        <div class="timeline-dot"></div>
-                        <div class="exp-content reveal-left">
-                            <div class="glass-card">
-                                <div class="exp-header">
-                                    <div class="exp-company-info">
-                                        <div class="company-logo">
-                                            <img src="https://images.crunchbase.com/image/upload/b0eb6071274e4a3bb894d657ab7e9f9a"
-                                                alt="Ola">
-                                        </div>
-                                        <div>
-                                            <h3 class="exp-title">Software Development Engineer</h3>
-                                            <div class="exp-company">
-                                                Ola Electric
-                                                <a href="https://play.google.com/store/apps/details?id=com.olaelectric.companion&hl=en_IN"
-                                                    target="_blank"
-                                                    style="background: rgba(59,130,246,0.1); color: #93c5fd; padding: 2px 8px; border-radius: 99px; text-decoration: none; font-size: 9px; border: 1px solid rgba(59,130,246,0.2); display: flex; align-items: center; gap: 4px;">
-                                                    <i data-lucide="play" style="width:8px; fill: currentColor"></i>
-                                                    LIVE APP <i data-lucide="external-link" style="width:8px"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="exp-meta">
-                                        <div class="exp-meta-item"><i data-lucide="calendar" style="width:12px"></i>
-                                            JULY 2022 - OCT 2025</div>
-                                        <div class="exp-meta-item"><i data-lucide="map-pin" style="width:12px"></i>
-                                            BANGALORE, IN</div>
-                                    </div>
-                                </div>
-                                <ul class="exp-description">
-                                    <li>Developed Proximity feature enhancing success rate from 26% to 98%.</li>
-                                    <li>Developed Megaphone (PATENTED) feature using real-time audio processing via
-                                        Android NDK.</li>
-                                    <li>Integrated OLA Maps SDK for tracking & dynamic UI, increasing engagement by 20%.
-                                    </li>
-                                    <li>Led Koin to Hilt migration, reducing app loading time from 12s to 7s.</li>
-                                    <li>Maintained 99.96% crash-free sessions for 1M+ active users.</li>
-                                </ul>
-                                <div class="exp-footer">
-                                    <p
-                                        style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: #475569; font-weight: 700; margin-bottom: 0.75rem;">
-                                        Core Stack</p>
-                                    <div class="tech-tags">
-                                        <span class="tech-tag">BLE</span><span class="tech-tag">NDK</span><span
-                                            class="tech-tag">HILT</span><span class="tech-tag">MAPS SDK</span><span
-                                            class="tech-tag">EXOPLAYER</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- UiT -->
-                    <div class="experience-item">
-                        <div class="timeline-dot"></div>
-                        <div class="exp-content reveal-left">
-                            <div class="glass-card">
-                                <div class="exp-header">
-                                    <div class="exp-company-info">
-                                        <div class="company-logo">
-                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5qaTMUDaC2la2g__sSzvy4X9H6--2Yt5osw&s"
-                                                alt="UiT">
-                                        </div>
-                                        <div>
-                                            <h3 class="exp-title">Research Intern</h3>
-                                            <p class="exp-company">UiT Norway</p>
-                                        </div>
-                                    </div>
-                                    <div class="exp-meta">
-                                        <div class="exp-meta-item"><i data-lucide="calendar" style="width:12px"></i>
-                                            APRIL 2021 - JULY 2021</div>
-                                        <div class="exp-meta-item"><i data-lucide="map-pin" style="width:12px"></i>
-                                            TROMSO, NOR</div>
-                                    </div>
-                                </div>
-                                <ul class="exp-description">
-                                    <li>Developed algorithms for acoustic microscopy utilizing LabView and MATLAB.</li>
-                                    <li>Achieved 40% reduction in scanning time for biological samples.</li>
-                                    <li>Engineered synthetic aperture focusing and tilt correction for high-resolution
-                                        4D scans.</li>
-                                </ul>
-                                <div class="exp-footer">
-                                    <p
-                                        style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: #475569; font-weight: 700; margin-bottom: 0.75rem;">
-                                        Core Stack</p>
-                                    <div class="tech-tags">
-                                        <span class="tech-tag">MATLAB</span><span class="tech-tag">LABVIEW</span><span
-                                            class="tech-tag">DSP</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Cueweb -->
-                    <div class="experience-item">
-                        <div class="timeline-dot"></div>
-                        <div class="exp-content reveal-left">
-                            <div class="glass-card">
-                                <div class="exp-header">
-                                    <div class="exp-company-info">
-                                        <div class="company-logo">
-                                            <i data-lucide="briefcase" style="width:24px; color:#94a3b8"></i>
-                                        </div>
-                                        <div>
-                                            <h3 class="exp-title">Software Engineer Team Lead</h3>
-                                            <p class="exp-company">Cueweb</p>
-                                        </div>
-                                    </div>
-                                    <div class="exp-meta">
-                                        <div class="exp-meta-item"><i data-lucide="calendar" style="width:12px"></i> JAN
-                                            2021 - APRIL 2021</div>
-                                        <div class="exp-meta-item"><i data-lucide="map-pin" style="width:12px"></i>
-                                            REMOTE</div>
-                                    </div>
-                                </div>
-                                <ul class="exp-description">
-                                    <li>Led a team of 10 members overseeing end-to-end architecture and milestones.</li>
-                                    <li>Developed 'Magarun', an online multiplayer cryptocurrency game.</li>
-                                    <li>Built client-facing dashboards, API panels, and crypto payment gateways.</li>
-                                </ul>
-                                <div class="exp-footer">
-                                    <p
-                                        style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: #475569; font-weight: 700; margin-bottom: 0.75rem;">
-                                        Core Stack</p>
-                                    <div class="tech-tags">
-                                        <span class="tech-tag">NODEJS</span><span
-                                            class="tech-tag">BLOCKCHAIN</span><span
-                                            class="tech-tag">RETHINKDB</span><span class="tech-tag">GITLAB</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Security & Bug Hunting -->
-        <section id="security" class="section-padding">
-            <div class="container overflow-hidden">
-                <div class="grid-2 gap-12 items-center">
-                    <div class="reveal">
-                        <div style="display:flex; align-items:center; gap:12px; margin-bottom:1.5rem">
-                            <i data-lucide="shield" style="width:32px; height:32px; color:var(--red-500)"></i>
-                            <h2 style="font-size: 2.5rem; font-weight: 700;">Security & Bug Hunting</h2>
-                        </div>
-                        <p style="color:#94a3b8; font-size: 1.125rem; margin-bottom: 2.5rem; line-height: 1.7;">
-                            With a security-first mindset, I have identified vulnerabilities in major platforms.
-                            My expertise in reverse engineering and securing applications is a core part of my software
-                            philosophy.
-                        </p>
-
-                        <a href="https://www.cert.europa.eu/hall-of-fame" target="_blank" class="glass recognition-item"
-                            style="border-radius: 1rem;">
-                            <div style="display:flex; align-items:center; gap:1rem">
-                                <div class="rec-icon"
-                                    style="background: linear-gradient(to bottom right, #2563eb, #4f46e5);"><i
-                                        data-lucide="trophy" style="width:20px"></i></div>
-                                <div>
-                                    <h4 style="color:#fff; font-weight:700">CERT.europa</h4>
-                                    <p style="font-size:0.8rem; color:#64748b">Hall of Fame - Security Researcher</p>
-                                </div>
-                            </div>
-                            <i data-lucide="external-link" style="width:16px; color:#475569"></i>
-                        </a>
-                        <a href="https://www.hoorn.nl/responsibledisclosure" target="_blank"
-                            class="glass recognition-item" style="border-radius: 1rem;">
-                            <div style="display:flex; align-items:center; gap:1rem">
-                                <div class="rec-icon"
-                                    style="background: linear-gradient(to bottom right, #f59e0b, #ea580c);"><i
-                                        data-lucide="trophy" style="width:20px"></i></div>
-                                <div>
-                                    <h4 style="color:#fff; font-weight:700">Hoorn.nl</h4>
-                                    <p style="font-size:0.8rem; color:#64748b">Responsible Disclosure Hall of Fame</p>
-                                </div>
-                            </div>
-                            <i data-lucide="external-link" style="width:16px; color:#475569"></i>
-                        </a>
-                        <div class="glass recognition-item" style="border-radius: 1rem;">
-                            <div style="display:flex; align-items:center; gap:1rem">
-                                <div class="rec-icon"
-                                    style="background: linear-gradient(to bottom right, #ef4444, #e11d48);"><i
-                                        data-lucide="trophy" style="width:20px"></i></div>
-                                <div>
-                                    <h4 style="color:#fff; font-weight:700">Google/Flipkart</h4>
-                                    <p style="font-size:0.8rem; color:#64748b">Proven Bug Hunter (Various Findings)</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="glass reveal"
-                        style="padding: 2.5rem; border-radius: 2rem; border-color: rgba(239, 68, 68, 0.1); position: relative; overflow: hidden; transition-delay: 0.2s">
-                        <i data-lucide="youtube"
-                            style="position:absolute; top: -10px; right: -10px; width:128px; height:128px; color:#ef4444; opacity: 0.05;"></i>
-                        <div
-                            style="display:flex; align-items:center; gap:8px; color:var(--red-500); margin-bottom:1rem">
-                            <i data-lucide="youtube" style="width:24px"></i>
-                            <span
-                                style="font-family:monospace; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; font-weight:700">Content
-                                Creator</span>
-                        </div>
-                        <h3 style="font-size: 2rem; font-weight: 700; margin-bottom:1.5rem">POCExperts Channel</h3>
-                        <p style="color:#94a3b8; margin-bottom:2.5rem">I share Proof of Concept (POC) security research,
-                            exploring advanced concepts in mobile security, reverse engineering, and bug hunting.</p>
-                        <a href="https://www.youtube.com/c/pocexperts" target="_blank" class="btn-primary"
-                            style="background:#ef4444; color:#fff; width:fit-content; border:none">
-                            Watch POCExperts <i data-lucide="youtube"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="section-padding" style="background: rgba(0,0,0,0.2)">
-            <div class="container text-center reveal" style="margin-bottom: 4rem;">
-                <h2 class="text-gradient" style="font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem;">Featured
-                    Projects</h2>
-                <div style="display:flex; justify-content:center; align-items:center; gap:8px; color:#475569">
-                    <i data-lucide="code-2" style="width:20px"></i>
-                    <span style="font-family:monospace; font-size:12px; text-decoration:underline">Building the
-                        future</span>
-                </div>
+              <a
+                href="https://bit.ly/resumeshubhamola"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-white border-2 border-[#0A2619]/10 px-8 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 hover:bg-slate-50 transition-all duration-300"
+              >
+                <i data-lucide="file-text" class="w-5 h-5"></i>
+                Resume
+              </a>
             </div>
 
-            <div class="container">
-                <div class="grid-2 gap-6" style="margin-bottom: 6rem;">
-                    <!-- Bosch -->
-                    <div class="glass-card reveal" style="display:flex; flex-direction:column; position:relative">
-                        <div style="position:absolute; top:1rem; right:1rem">
-                            <span class="highlight-tag yellow">Gold Medal @ Inter IIT</span>
-                        </div>
-                        <div style="display:flex; gap:1.25rem; margin-bottom:1.5rem">
-                            <div class="company-logo" style="width:48px; height:48px; border-radius:1rem">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Bosch-logo.svg"
-                                    alt="Bosch">
-                            </div>
-                            <div>
-                                <h3 style="font-size:1.5rem; font-weight:700">BOSCH Route Optimization</h3>
-                                <p style="color:#94a3b8; font-size:0.95rem; margin-top:0.5rem; line-height: 1.6;">Inter
-                                    IIT Gold Medalist project involving complex algorithms for route efficiency and
-                                    logistics optimization.</p>
-                            </div>
-                        </div>
-                        <div class="tech-tags" style="margin-bottom:1.5rem">
-                            <span class="tech-tag">ALGORITHMS</span><span class="tech-tag">PYTHON</span><span
-                                class="tech-tag">GIS</span>
-                        </div>
-                        <a href="https://github.com/gptshubham595/BOSCH-Route-Optimization-INTERIIT" target="_blank"
-                            style="margin-top:auto; color:#94a3b8; text-decoration:none; font-size:13px; font-weight:500; display:flex; align-items:center; gap:8px">
-                            <i data-lucide="github" style="width:16px"></i> Codebase
-                        </a>
-                    </div>
-
-                    <!-- Oboe -->
-                    <div class="glass-card reveal"
-                        style="display:flex; flex-direction:column; position:relative; transition-delay: 0.1s">
-                        <div style="position:absolute; top:1rem; right:1rem">
-                            <span class="highlight-tag yellow">Android NDK</span>
-                        </div>
-                        <div style="display:flex; gap:1.25rem; margin-bottom:1.5rem">
-                            <div class="company-logo" style="width:48px; height:48px; border-radius:1rem">
-                                <img src="https://www.vectorlogo.zone/logos/android/android-icon.svg" alt="Android">
-                            </div>
-                            <div>
-                                <h3 style="font-size:1.5rem; font-weight:700">Oboe Audio Recorder</h3>
-                                <p style="color:#94a3b8; font-size:0.95rem; margin-top:0.5rem; line-height: 1.6;">
-                                    Low-latency audio recording system built with Kotlin and Android NDK using Google's
-                                    Oboe library.</p>
-                            </div>
-                        </div>
-                        <div class="tech-tags" style="margin-bottom:1.5rem">
-                            <span class="tech-tag">NDK</span><span class="tech-tag">C++</span><span
-                                class="tech-tag">AUDIO</span><span class="tech-tag">KOTLIN</span>
-                        </div>
-                        <a href="https://github.com/gptshubham595/OboeAudioRecorder" target="_blank"
-                            style="margin-top:auto; color:#94a3b8; text-decoration:none; font-size:13px; font-weight:500; display:flex; align-items:center; gap:8px">
-                            <i data-lucide="github" style="width:16px"></i> Codebase
-                        </a>
-                    </div>
-
-                    <!-- Hard75ChallengeKMM -->
-                    <div class="glass-card reveal"
-                        style="display:flex; flex-direction:column; position:relative; transition-delay: 0.2s">
-                        <div style="position:absolute; top:1rem; right:1rem">
-                            <span class="highlight-tag yellow">Android Kotlin Multiplatform</span>
-                        </div>
-                        <div style="display:flex; gap:1.25rem; margin-bottom:1.5rem">
-                            <div class="company-logo" style="width:48px; height:48px; border-radius:1rem">
-                                <img src="https://www.vectorlogo.zone/logos/kotlinlang/kotlinlang-icon.svg"
-                                    alt="Kotlin">
-                            </div>
-                            <div>
-                                <h3 style="font-size:1.5rem; font-weight:700">Hard75ChallengeKMM</h3>
-                                <p style="color:#94a3b8; font-size:0.95rem; margin-top:0.5rem; line-height: 1.6;">Kotlin
-                                    Multiplatform (KMM) application to track and measure the Hard 75 challenge across
-                                    platforms.</p>
-                            </div>
-                        </div>
-                        <div class="tech-tags" style="margin-bottom:1.5rem">
-                            <span class="tech-tag">KMM</span><span class="tech-tag">KOTLIN</span><span
-                                class="tech-tag">ANDROID</span><span class="tech-tag">IOS</span>
-                        </div>
-                        <a href="https://github.com/gptshubham595/Hard75ChallengeKMM" target="_blank"
-                            style="margin-top:auto; color:#94a3b8; text-decoration:none; font-size:13px; font-weight:500; display:flex; align-items:center; gap:8px">
-                            <i data-lucide="github" style="width:16px"></i> Codebase
-                        </a>
-                    </div>
-
-                    <!-- Secure Blockchain Voting -->
-                    <div class="glass-card reveal"
-                        style="display:flex; flex-direction:column; position:relative; transition-delay: 0.3s">
-                        <div style="position:absolute; top:1rem; right:1rem">
-                            <span class="highlight-tag yellow">Android Hackathon</span>
-                        </div>
-                        <div style="display:flex; gap:1.25rem; margin-bottom:1.5rem">
-                            <div class="company-logo" style="width:48px; height:48px; border-radius:1rem">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
-                                    alt="Microsoft">
-                            </div>
-                            <div>
-                                <h3 style="font-size:1.5rem; font-weight:700">Secure Blockchain Voting</h3>
-                                <p style="color:#94a3b8; font-size:0.95rem; margin-top:0.5rem; line-height: 1.6;">
-                                    Microsoft CodeFunDo Challenge finalist. A secure, decentralized voting platform
-                                    using blockchain technologies.</p>
-                            </div>
-                        </div>
-                        <div class="tech-tags" style="margin-bottom:1.5rem">
-                            <span class="tech-tag">BLOCKCHAIN</span><span class="tech-tag">SECURITY</span><span
-                                class="tech-tag">CRYPTOGRAPHIC</span>
-                        </div>
-                        <a href="https://github.com/gptshubham595/codefundo404-WeFoundIt" target="_blank"
-                            style="margin-top:auto; color:#94a3b8; text-decoration:none; font-size:13px; font-weight:500; display:flex; align-items:center; gap:8px">
-                            <i data-lucide="github" style="width:16px"></i> Codebase
-                        </a>
-                    </div>
-                </div>
-
-                <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 6rem;">
-                    <div class="reveal" style="display:flex; align-items:center; gap:12px; margin-bottom:4rem">
-                        <i data-lucide="book-open" style="width:40px; height:40px; color:var(--indigo-400)"></i>
-                        <h2 style="font-size: 3rem; font-weight: 800;">Technical Writing</h2>
-                    </div>
-
-                    <div class="grid-3">
-                        <a href="https://proandroiddev.com/dynamic-app-mode-theme-and-launcher-icon-switch-in-android-a-complete-guide-f30291d90b5e"
-                            target="_blank" class="glass-card reveal"
-                            style="padding:0; overflow:hidden; text-decoration:none">
-                            <div style="height:14rem; overflow:hidden"><img
-                                    src="https://miro.medium.com/v2/resize:fit:3840/format:webp/1*-4ipso15z7hcb2XhpsWExw.png"
-                                    style="width:100%; height:100%; object-fit:cover;"></div>
-                            <div style="padding:1.5rem">
-                                <h4
-                                    style="color:#fff; font-size:1.25rem; font-weight:700; margin-bottom:0.75rem; line-height:1.2">
-                                    Dynamic App Mode & Launcher Icon Switch</h4>
-                                <p style="color:#64748b; font-size:0.875rem; margin-bottom:1.5rem; line-height:1.6">A
-                                    complete guide on implementing custom dynamic themes and launcher icons in modern
-                                    Android.</p>
-                                <span
-                                    style="color:var(--indigo-400); font-weight:700; font-size:12px; display:flex; align-items:center; gap:4px">READ
-                                    ON MEDIUM <i data-lucide="external-link" style="width:12px"></i></span>
-                            </div>
-                        </a>
-                        <a href="https://blog.stackademic.com/%EF%B8%8Fdefending-mobile-apps-against-frida-even-with-root-bypass-android-f26ae7df4e89"
-                            target="_blank" class="glass-card reveal"
-                            style="padding:0; overflow:hidden; text-decoration:none; transition-delay: 0.1s">
-                            <div style="height:14rem; overflow:hidden"><img
-                                    src="https://miro.medium.com/v2/resize:fit:3840/format:webp/1*CjuzJhDEOseHegJGO7EQKQ.png"
-                                    style="width:100%; height:100%; object-fit:cover;"></div>
-                            <div style="padding:1.5rem">
-                                <h4
-                                    style="color:#fff; font-size:1.25rem; font-weight:700; margin-bottom:0.75rem; line-height:1.2">
-                                    Defending Mobile Apps against Frida</h4>
-                                <p style="color:#64748b; font-size:0.875rem; margin-bottom:1.5rem; line-height:1.6">
-                                    Advanced security techniques to protect your Android applications even with root
-                                    bypass.</p>
-                                <span
-                                    style="color:var(--indigo-400); font-weight:700; font-size:12px; display:flex; align-items:center; gap:4px">READ
-                                    ON MEDIUM <i data-lucide="external-link" style="width:12px"></i></span>
-                            </div>
-                        </a>
-                        <a href="https://blog.stackademic.com/how-did-we-implement-in-app-language-switching-in-jetpack-compose-048a2035be51"
-                            target="_blank" class="glass-card reveal"
-                            style="padding:0; overflow:hidden; text-decoration:none; transition-delay: 0.2s">
-                            <div style="height:14rem; overflow:hidden"><img
-                                    src="https://miro.medium.com/v2/resize:fit:3840/format:webp/1*zFKmnIBHiqDbMMBe60mKjA.png"
-                                    style="width:100%; height:100%; object-fit:cover;"></div>
-                            <div style="padding:1.5rem">
-                                <h4
-                                    style="color:#fff; font-size:1.25rem; font-weight:700; margin-bottom:0.75rem; line-height:1.2">
-                                    Language Switching in Jetpack Compose</h4>
-                                <p style="color:#64748b; font-size:0.875rem; margin-bottom:1.5rem; line-height:1.6">A
-                                    simplified approach to multi-language support in modern Android UIs with Jetpack
-                                    Compose.</p>
-                                <span
-                                    style="color:var(--indigo-400); font-weight:700; font-size:12px; display:flex; align-items:center; gap:4px">READ
-                                    ON MEDIUM <i data-lucide="external-link" style="width:12px"></i></span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+            <div class="mt-12 flex flex-wrap items-center gap-6 text-sm text-slate-500 font-medium">
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4 text-green-600"></i> Oracle · Ola Electric
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4 text-green-600"></i> Android · NDK · Compose
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4 text-green-600"></i> Security research
+              </div>
             </div>
-        </section>
 
-        <!-- Research Section -->
-        <section id="research" class="section-padding">
-            <div class="container overflow-hidden">
-                <div class="reveal"
-                    style="display:flex; justify-content:center; align-items:center; gap:16px; margin-bottom:4rem">
-                    <i data-lucide="graduation-cap" style="width:40px; height:40px; color:var(--blue-400)"></i>
-                    <h2 style="font-size: 3rem; font-weight: 800;">Research & Publications</h2>
-                </div>
-
-                <div style="display:flex; flex-direction:column; gap:1rem; max-width: 900px; margin: 0 auto;">
-                    <!-- Pub 1 -->
-                    <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=B8VoEywAAAAJ&citation_for_view=B8VoEywAAAAJ:jgBuDB5drN8C"
-                        target="_blank" class="glass-card reveal" style="padding: 1.5rem 2rem; text-decoration:none">
-                        <div class="flex-responsive sm-justify-between sm-align-center">
-                            <div style="padding-right:2rem">
-                                <h3 style="font-size:1.125rem; font-weight:700; color:#f8fafc; margin-bottom:0.5rem">
-                                    Image denoising in acoustic microscopy using block-matching and 4D filter</h3>
-                                <div
-                                    style="display:flex; gap:1rem; font-size:13px; color:var(--blue-400); font-weight:600">
-                                    <span style="display:flex; align-items:center; gap:4px"><i data-lucide="quote"
-                                            style="width:12px"></i> Nature Scientific Reports</span>
-                                    <span style="display:flex; align-items:center; gap:4px"><i data-lucide="calendar"
-                                            style="width:12px"></i> 2023</span>
-                                </div>
-                            </div>
-                            <div style="display:flex; align-items:center; gap:1rem; margin-top:1rem; sm:margin-top:0">
-                                <span
-                                    style="font-family:monospace; font-size:11px; font-weight:700; background:rgba(255,255,255,0.05); padding:4px 12px; border:1px solid rgba(255,255,255,0.1); border-radius:99px">CITATIONS:
-                                    <span style="color:var(--blue-400)">35</span></span>
-                                <i data-lucide="external-link" style="width:20px; color:#475569"></i>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Pub 2 -->
-                    <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=B8VoEywAAAAJ&citation_for_view=B8VoEywAAAAJ:43bX7VzcjpAC"
-                        target="_blank" class="glass-card reveal"
-                        style="padding: 1.5rem 2rem; text-decoration:none; transition-delay: 0.1s">
-                        <div class="flex-responsive sm-justify-between sm-align-center">
-                            <div style="padding-right:2rem">
-                                <h3 style="font-size:1.125rem; font-weight:700; color:#f8fafc; margin-bottom:0.5rem">
-                                    Block-matching and 3D filtering-based denoising of acoustic images</h3>
-                                <div
-                                    style="display:flex; gap:1rem; font-size:13px; color:var(--blue-400); font-weight:600">
-                                    <span style="display:flex; align-items:center; gap:4px"><i data-lucide="quote"
-                                            style="width:12px"></i> Applied Acoustics Journal</span>
-                                    <span style="display:flex; align-items:center; gap:4px"><i data-lucide="calendar"
-                                            style="width:12px"></i> 2024</span>
-                                </div>
-                            </div>
-                            <div style="display:flex; align-items:center; gap:1rem; margin-top:1rem; sm:margin-top:0">
-                                <span
-                                    style="font-family:monospace; font-size:11px; font-weight:700; background:rgba(255,255,255,0.05); padding:4px 12px; border:1px solid rgba(255,255,255,0.1); border-radius:99px">CITATIONS:
-                                    <span style="color:var(--blue-400)">14</span></span>
-                                <i data-lucide="external-link" style="width:20px; color:#475569"></i>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Pub 3 -->
-                    <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=B8VoEywAAAAJ&citation_for_view=B8VoEywAAAAJ:CaZNVDsoPx4C"
-                        target="_blank" class="glass-card reveal"
-                        style="padding: 1.5rem 2rem; text-decoration:none; transition-delay: 0.2s">
-                        <div class="flex-responsive sm-justify-between sm-align-center">
-                            <div style="padding-right:2rem">
-                                <h3 style="font-size:1.125rem; font-weight:700; color:#f8fafc; margin-bottom:0.5rem">
-                                    Automated tilt compensation in acoustic microscopy</h3>
-                                <div
-                                    style="display:flex; gap:1rem; font-size:13px; color:var(--blue-400); font-weight:600">
-                                    <span style="display:flex; align-items:center; gap:4px"><i data-lucide="quote"
-                                            style="width:12px"></i> Journal of Microscopy</span>
-                                    <span style="display:flex; align-items:center; gap:4px"><i data-lucide="calendar"
-                                            style="width:12px"></i> 2023</span>
-                                </div>
-                            </div>
-                            <div style="display:flex; align-items:center; gap:1rem; margin-top:1rem; sm:margin-top:0">
-                                <span
-                                    style="font-family:monospace; font-size:11px; font-weight:700; background:rgba(255,255,255,0.05); padding:4px 12px; border:1px solid rgba(255,255,255,0.1); border-radius:99px">CITATIONS:
-                                    <span style="color:var(--blue-400)">8</span></span>
-                                <i data-lucide="external-link" style="width:20px; color:#475569"></i>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Pub 4 -->
-                    <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=B8VoEywAAAAJ&citation_for_view=B8VoEywAAAAJ:BzfGm06jWhQC"
-                        target="_blank" class="glass-card reveal"
-                        style="padding: 1.5rem 2rem; text-decoration:none; transition-delay: 0.3s">
-                        <div class="flex-responsive sm-justify-between sm-align-center">
-                            <div style="padding-right:2rem">
-                                <h3 style="font-size:1.125rem; font-weight:700; color:#f8fafc; margin-bottom:0.5rem">
-                                    AutoSAFT: Autofocusing for extended depth of imaging in scanning acoustic microscopy
-                                </h3>
-                                <div
-                                    style="display:flex; gap:1rem; font-size:13px; color:var(--blue-400); font-weight:600">
-                                    <span style="display:flex; align-items:center; gap:4px"><i data-lucide="quote"
-                                            style="width:12px"></i> Journal of Microscopy</span>
-                                    <span style="display:flex; align-items:center; gap:4px"><i data-lucide="calendar"
-                                            style="width:12px"></i> 2025</span>
-                                </div>
-                            </div>
-                            <div style="display:flex; align-items:center; gap:1rem; margin-top:1rem; sm:margin-top:0">
-                                <span
-                                    style="font-family:monospace; font-size:11px; font-weight:700; background:rgba(255,255,255,0.05); padding:4px 12px; border:1px solid rgba(255,255,255,0.1); border-radius:99px">CITATIONS:
-                                    <span style="color:var(--blue-400)">3</span></span>
-                                <i data-lucide="external-link" style="width:20px; color:#475569"></i>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Pub 5 -->
-                    <a href="https://scholar.google.com/citations?hl=en&user=B8VoEywAAAAJ" target="_blank"
-                        class="glass-card reveal"
-                        style="padding: 1.5rem 2rem; text-decoration:none; transition-delay: 0.4s">
-                        <div class="flex-responsive sm-justify-between sm-align-center">
-                            <div style="padding-right:2rem">
-                                <h3 style="font-size:1.125rem; font-weight:700; color:#f8fafc; margin-bottom:0.5rem">
-                                    Extended Depth Acoustic Imaging with AutoSAFT and Block-Matching 4D Filtering</h3>
-                                <div
-                                    style="display:flex; gap:1rem; font-size:13px; color:var(--blue-400); font-weight:600">
-                                    <span style="display:flex; align-items:center; gap:4px"><i data-lucide="quote"
-                                            style="width:12px"></i> Scandinavian Symposium</span>
-                                    <span style="display:flex; align-items:center; gap:4px"><i data-lucide="calendar"
-                                            style="width:12px"></i> 2025</span>
-                                </div>
-                            </div>
-                            <div style="display:flex; align-items:center; gap:1rem; margin-top:1rem; sm:margin-top:0">
-                                <span
-                                    style="font-family:monospace; font-size:11px; font-weight:700; background:rgba(255,255,255,0.05); padding:4px 12px; border:1px solid rgba(255,255,255,0.1); border-radius:99px">CITATIONS:
-                                    <span style="color:var(--blue-400)">0</span></span>
-                                <i data-lucide="external-link" style="width:20px; color:#475569"></i>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Pub 6 -->
-                    <a href="https://scholar.google.com/citations?hl=en&user=B8VoEywAAAAJ" target="_blank"
-                        class="glass-card reveal"
-                        style="padding: 1.5rem 2rem; text-decoration:none; transition-delay: 0.5s">
-                        <div class="flex-responsive sm-justify-between sm-align-center">
-                            <div style="padding-right:2rem">
-                                <h3 style="font-size:1.125rem; font-weight:700; color:#f8fafc; margin-bottom:0.5rem">
-                                    Ultrasonic signal denoising using hybrid filter for image reconstruction</h3>
-                                <div
-                                    style="display:flex; gap:1rem; font-size:13px; color:var(--blue-400); font-weight:600">
-                                    <span style="display:flex; align-items:center; gap:4px"><i data-lucide="quote"
-                                            style="width:12px"></i> Symposium on Ultrasonic Electronics</span>
-                                    <span style="display:flex; align-items:center; gap:4px"><i data-lucide="calendar"
-                                            style="width:12px"></i> 2021</span>
-                                </div>
-                            </div>
-                            <div style="display:flex; align-items:center; gap:1rem; margin-top:1rem; sm:margin-top:0">
-                                <span
-                                    style="font-family:monospace; font-size:11px; font-weight:700; background:rgba(255,255,255,0.05); padding:4px 12px; border:1px solid rgba(255,255,255,0.1); border-radius:99px">CITATIONS:
-                                    <span style="color:var(--blue-400)">0</span></span>
-                                <i data-lucide="external-link" style="width:20px; color:#475569"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="reveal" style="text-align:center; margin-top:4rem">
-                    <a href="https://scholar.google.com/citations?hl=en&user=B8VoEywAAAAJ" target="_blank"
-                        style="color:var(--blue-400); text-decoration:none; font-weight:700; font-size:14px; display:inline-flex; align-items:center; gap:8px">VIEW
-                        ALL ON GOOGLE SCHOLAR <i data-lucide="graduation-cap" style="width:16px"></i></a>
-                </div>
+            <div class="mt-6 flex gap-4">
+              <a
+                href="https://www.linkedin.com/in/shubhamguptaggps"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                class="w-10 h-10 bg-white border border-[#0A2619]/10 rounded-full flex items-center justify-center hover:border-[#D97706]/30 hover:text-[#D97706] transition-colors"
+                ><i data-lucide="linkedin" class="w-5 h-5"></i
+              ></a>
+              <a
+                href="https://github.com/gptshubham595"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                class="w-10 h-10 bg-white border border-[#0A2619]/10 rounded-full flex items-center justify-center hover:border-[#D97706]/30 hover:text-[#D97706] transition-colors"
+                ><i data-lucide="github" class="w-5 h-5"></i
+              ></a>
+              <a
+                href="https://www.youtube.com/c/pocexperts"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                class="w-10 h-10 bg-white border border-[#0A2619]/10 rounded-full flex items-center justify-center hover:border-[#D97706]/30 hover:text-[#D97706] transition-colors"
+                ><i data-lucide="youtube" class="w-5 h-5"></i
+              ></a>
+              <a
+                href="mailto:gptshubham595@gmail.com?subject=Project%20Inquiry"
+                aria-label="Email"
+                class="w-10 h-10 bg-white border border-[#0A2619]/10 rounded-full flex items-center justify-center hover:border-[#D97706]/30 hover:text-[#D97706] transition-colors"
+                ><i data-lucide="mail" class="w-5 h-5"></i
+              ></a>
             </div>
-        </section>
+          </div>
 
-        <!-- Footer -->
-        <footer class="section-padding reveal" style="border-top:1px solid rgba(255,255,255,0.05); text-align:center">
-            <div class="container">
-                <p
-                    style="color:#475569; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.3em; margin-bottom:2rem">
-                    Designed & Built with Pure Code © 2026</p>
-                <div style="display:flex; gap:1rem; justify-content:center">
-                    <a href="https://linkedin.com/in/shubhamguptaggps" target="_blank" class="social-icon glass"><i
-                            data-lucide="linkedin"></i></a>
-                    <a href="https://github.com/gptshubham595" target="_blank" class="social-icon glass"><i
-                            data-lucide="github"></i></a>
-                    <a href="mailto:gptshubham595@gmail.com" class="social-icon glass"><i data-lucide="mail"></i></a>
+          <!-- Photo + Stats -->
+          <div class="relative">
+            <div class="absolute -top-20 -right-20 w-96 h-96 bg-[#D97706]/10 blur-[120px] rounded-full"></div>
+            <div class="relative glass-card rounded-[40px] p-8 shadow-2xl floating">
+              <div class="flex flex-col items-center text-center">
+                <div class="w-48 h-48 md:w-56 md:h-56 rounded-3xl overflow-hidden border-2 border-[#0A2619]/10 mb-6">
+                  <img
+                    src="photo.jpeg"
+                    alt="Shubham Kumar Gupta"
+                    class="w-full h-full object-cover"
+                    onerror="this.style.display='none'"
+                  />
                 </div>
+
+                <div class="grid grid-cols-3 gap-4 w-full">
+                  <div class="bg-white/50 p-4 rounded-2xl border border-white">
+                    <p class="text-2xl font-extrabold text-[#0A2619]">3.5+</p>
+                    <p class="text-xs font-bold text-slate-500 uppercase">Years</p>
+                  </div>
+                  <div class="bg-white/50 p-4 rounded-2xl border border-white">
+                    <p class="text-2xl font-extrabold text-[#0A2619]">1M+</p>
+                    <p class="text-xs font-bold text-slate-500 uppercase">Users</p>
+                  </div>
+                  <div class="bg-white/50 p-4 rounded-2xl border border-white">
+                    <p class="text-2xl font-extrabold text-[#0A2619]">5+</p>
+                    <p class="text-xs font-bold text-slate-500 uppercase">Publications</p>
+                  </div>
+                </div>
+              </div>
             </div>
-        </footer>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trust marquee -->
+      <div class="bg-[#0A2619] py-10 overflow-hidden relative rotate-[-1deg] w-[110%] -ml-[5%] shadow-2xl">
+        <div class="ticker-wrap">
+          <div class="ticker-move flex items-center gap-12 text-white/40 font-bold text-xl uppercase tracking-widest">
+            <span>Oracle</span> <span>✦</span> <span>Ola Electric</span> <span>✦</span> <span>CERT.europa</span>
+            <span>✦</span> <span>POCExperts</span> <span>✦</span> <span>UiT Norway</span> <span>✦</span>
+            <span class="text-white">Available for contract</span> <span>✦</span>
+            <span>Oracle</span> <span>✦</span> <span>Ola Electric</span> <span>✦</span> <span>CERT.europa</span>
+            <span>✦</span> <span>POCExperts</span> <span>✦</span> <span>UiT Norway</span> <span>✦</span>
+            <span class="text-white">Available for contract</span> <span>✦</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- About -->
+      <section id="about" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-extrabold mb-6">About</h2>
+          <p class="text-xl text-slate-600 max-w-2xl mx-auto">
+            Senior mobile engineer focused on performance, security, and clean architecture.
+          </p>
+        </div>
+
+        <div class="max-w-3xl mx-auto glass-card rounded-[32px] p-10 text-center">
+          <p class="text-lg text-slate-600 leading-relaxed">
+            I help product teams ship high-quality Android experiences—clean architecture, performance profiling,
+            CI/CD discipline, and security-first engineering. I’ve built consumer-scale features for 1M+ users,
+            worked on real-time audio using NDK/C++, and published research in acoustic imaging. I also share practical
+            engineering learnings via the POCExperts YouTube channel.
+          </p>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section id="experience" class="py-24 bg-[#0A2619] text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
+            <div class="max-w-2xl">
+              <p class="text-[#D97706] font-bold tracking-widest uppercase mb-4">Selected Experience</p>
+              <h2 class="text-4xl md:text-6xl font-extrabold">Where I’ve Built</h2>
+            </div>
+            <p class="text-white/60 text-lg max-w-sm">
+              Android at scale, NDK/C++, and security-first engineering—end to end.
+            </p>
+          </div>
+
+          <div class="space-y-6">
+            <!-- Oracle -->
+            <div
+              class="bg-white/5 p-8 rounded-[32px] border border-white/10 hover:bg-white/[0.08] transition-all flex flex-col md:flex-row md:items-center justify-between gap-6"
+            >
+              <div class="flex items-center gap-6">
+                <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="building-2" class="w-7 h-7 text-[#D97706]"></i>
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold">Senior Mobile Developer</h3>
+                  <p class="text-[#D97706] font-semibold text-sm uppercase tracking-wider">
+                    Oracle · (update dates) · Bangalore
+                  </p>
+                </div>
+              </div>
+              <p class="text-white/70 text-sm max-w-xl">
+                Real-time workflows, state machines, Jetpack Compose, and NDK/C++ audio. Emphasis on reliability,
+                testability, and production readiness.
+              </p>
+            </div>
+
+            <!-- Ola Electric -->
+            <div
+              class="bg-white/5 p-8 rounded-[32px] border border-white/10 hover:bg-white/[0.08] transition-all flex flex-col md:flex-row md:items-center justify-between gap-6"
+            >
+              <div class="flex items-center gap-6">
+                <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="zap" class="w-7 h-7 text-[#D97706]"></i>
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold">Software Development Engineer</h3>
+                  <p class="text-[#D97706] font-semibold text-sm uppercase tracking-wider">
+                    Ola Electric · (update dates) · Bangalore
+                  </p>
+                </div>
+              </div>
+              <p class="text-white/70 text-sm max-w-xl">
+                Shipped user-facing features at scale, improved stability, and worked across SDK integrations and
+                architecture modernization.
+              </p>
+            </div>
+
+            <!-- UiT -->
+            <div
+              class="bg-white/5 p-8 rounded-[32px] border border-white/10 hover:bg-white/[0.08] transition-all flex flex-col md:flex-row md:items-center justify-between gap-6"
+            >
+              <div class="flex items-center gap-6">
+                <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="graduation-cap" class="w-8 h-8 text-[#D97706]"></i>
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold">Research Intern</h3>
+                  <p class="text-[#D97706] font-semibold text-sm uppercase tracking-wider">
+                    UiT Norway · Apr – Jul 2021 · Tromsø
+                  </p>
+                </div>
+              </div>
+              <p class="text-white/70 text-sm max-w-xl">
+                Acoustic microscopy and imaging pipeline improvements (MATLAB/LabView), including scan-time reduction
+                and reconstruction techniques.
+              </p>
+            </div>
+          </div>
+
+          <p class="text-xs text-white/40 mt-8">
+            Note: keep employer details accurate and aligned with any applicable brand / communications guidelines.
+          </p>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section class="py-24 px-6 bg-[#FDF8F1]">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
+          <div class="text-center">
+            <div class="text-5xl font-extrabold text-[#0A2619] mb-2">3.5+</div>
+            <p class="text-slate-500 font-medium">Years Android</p>
+          </div>
+          <div class="text-center">
+            <div class="text-5xl font-extrabold text-[#0A2619] mb-2">1M+</div>
+            <p class="text-slate-500 font-medium">Users impacted</p>
+          </div>
+          <div class="text-center">
+            <div class="text-5xl font-extrabold text-[#0A2619] mb-2">5+</div>
+            <p class="text-slate-500 font-medium">Publications</p>
+          </div>
+          <div class="text-center">
+            <div class="text-5xl font-extrabold text-[#0A2619] mb-2">Hall of Fame</div>
+            <p class="text-slate-500 font-medium">CERT.europa</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="py-24 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+          <h2 class="text-5xl font-extrabold mb-16 text-center">
+            Featured Projects. <span class="text-slate-400">Open Source.</span>
+          </h2>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <a
+              href="https://github.com/gptshubham595/BOSCH-Route-Optimization-INTERIIT"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-white rounded-[40px] p-8 border border-slate-100 shadow-sm hover:shadow-2xl transition-all group"
+            >
+              <div class="flex justify-between items-center mb-6">
+                <span class="text-2xl">🏆</span>
+                <span class="text-xs font-bold bg-[#D97706]/10 text-[#D97706] px-3 py-1 rounded-full uppercase"
+                  >Gold @ Inter IIT</span
+                >
+              </div>
+              <h4 class="text-xl font-extrabold mb-4">BOSCH Route Optimization</h4>
+              <p class="text-slate-600 mb-6 text-sm">
+                Route efficiency and logistics algorithms. Inter IIT gold medalist.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-bold text-slate-500">Algorithms</span>
+                <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-bold text-slate-500">Python</span>
+              </div>
+              <span class="font-bold text-[#D97706] flex items-center gap-2 group-hover:translate-x-2 transition-transform text-sm"
+                >Codebase <i data-lucide="arrow-right" class="w-4 h-4"></i
+              ></span>
+            </a>
+
+            <a
+              href="https://github.com/gptshubham595/OboeAudioRecorder"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-white rounded-[40px] p-8 border border-slate-100 shadow-sm hover:shadow-2xl transition-all group"
+            >
+              <div class="flex justify-between items-center mb-6">
+                <span class="text-2xl">🎙️</span>
+                <span class="text-xs font-bold bg-blue-100 text-blue-600 px-3 py-1 rounded-full uppercase">NDK</span>
+              </div>
+              <h4 class="text-xl font-extrabold mb-4">Oboe Audio Recorder</h4>
+              <p class="text-slate-600 mb-6 text-sm">Low-latency recording with Kotlin and Oboe (NDK/C++).</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-bold text-slate-500">Kotlin</span>
+                <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-bold text-slate-500">C++</span>
+              </div>
+              <span class="font-bold text-[#D97706] flex items-center gap-2 group-hover:translate-x-2 transition-transform text-sm"
+                >Codebase <i data-lucide="arrow-right" class="w-4 h-4"></i
+              ></span>
+            </a>
+
+            <a
+              href="https://github.com/gptshubham595/Hard75ChallengeKMM"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-white rounded-[40px] p-8 border border-slate-100 shadow-sm hover:shadow-2xl transition-all group"
+            >
+              <div class="flex justify-between items-center mb-6">
+                <span class="text-2xl">📱</span>
+                <span class="text-xs font-bold bg-purple-100 text-purple-600 px-3 py-1 rounded-full uppercase">KMM</span>
+              </div>
+              <h4 class="text-xl font-extrabold mb-4">Hard75ChallengeKMM</h4>
+              <p class="text-slate-600 mb-6 text-sm">Kotlin Multiplatform app for the Hard 75 challenge (Android & iOS).</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-bold text-slate-500">KMM</span>
+                <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-bold text-slate-500">Kotlin</span>
+              </div>
+              <span class="font-bold text-[#D97706] flex items-center gap-2 group-hover:translate-x-2 transition-transform text-sm"
+                >Codebase <i data-lucide="arrow-right" class="w-4 h-4"></i
+              ></span>
+            </a>
+
+            <a
+              href="https://github.com/gptshubham595/codefundo404-WeFoundIt"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-white rounded-[40px] p-8 border border-slate-100 shadow-sm hover:shadow-2xl transition-all group"
+            >
+              <div class="flex justify-between items-center mb-6">
+                <span class="text-2xl">🔐</span>
+                <span class="text-xs font-bold bg-green-100 text-green-700 px-3 py-1 rounded-full uppercase"
+                  >Microsoft Finalist</span
+                >
+              </div>
+              <h4 class="text-xl font-extrabold mb-4">Secure Blockchain Voting</h4>
+              <p class="text-slate-600 mb-6 text-sm">Decentralized voting platform. CodeFunDo finalist.</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-bold text-slate-500">Blockchain</span>
+                <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-bold text-slate-500">Security</span>
+              </div>
+              <span class="font-bold text-[#D97706] flex items-center gap-2 group-hover:translate-x-2 transition-transform text-sm"
+                >Codebase <i data-lucide="arrow-right" class="w-4 h-4"></i
+              ></span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Security -->
+      <section id="security" class="py-24 bg-[#0A2619] text-white px-6">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid lg:grid-cols-2 gap-16 items-start">
+            <div>
+              <p class="text-[#D97706] font-bold tracking-widest uppercase mb-4">Security</p>
+              <h2 class="text-5xl font-extrabold mb-8">Security Research & Responsible Disclosure</h2>
+              <p class="text-white/60 text-xl leading-relaxed mb-10">
+                Responsible disclosure, mobile reverse engineering, and app hardening—focused on real-world impact.
+              </p>
+
+              <div class="space-y-4">
+                <a
+                  href="https://www.cert.europa.eu/hall-of-fame"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center justify-between p-6 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/[0.08] transition-all"
+                >
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-[#D97706] rounded-xl flex items-center justify-center">
+                      <i data-lucide="trophy" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold">CERT.europa</h4>
+                      <p class="text-sm text-white/50">Hall of Fame – Security Researcher</p>
+                    </div>
+                  </div>
+                  <i data-lucide="external-link" class="w-5 h-5 text-white/40"></i>
+                </a>
+
+                <a
+                  href="https://www.hoorn.nl/responsibledisclosure"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center justify-between p-6 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/[0.08] transition-all"
+                >
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-[#B45309] rounded-xl flex items-center justify-center">
+                      <i data-lucide="trophy" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold">Hoorn.nl</h4>
+                      <p class="text-sm text-white/50">Responsible Disclosure Hall of Fame</p>
+                    </div>
+                  </div>
+                  <i data-lucide="external-link" class="w-5 h-5 text-white/40"></i>
+                </a>
+
+                <div class="flex items-center justify-between p-6 bg-white/5 rounded-2xl border border-white/10">
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                      <i data-lucide="shield" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold">Google / Flipkart</h4>
+                      <p class="text-sm text-white/50">Bug bounty findings</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-10 rounded-[48px] bg-white/5 border border-white/10">
+              <div class="flex items-center gap-2 text-[#D97706] mb-6">
+                <i data-lucide="youtube" class="w-6 h-6"></i>
+                <span class="text-xs font-bold uppercase tracking-wider">POCExperts</span>
+              </div>
+              <h3 class="text-3xl font-bold mb-6">Mobile Security Content</h3>
+              <p class="text-white/70 text-lg leading-relaxed mb-8">
+                Proof-of-concept research and engineering learnings: mobile security, reverse engineering, and practical hardening.
+              </p>
+              <a
+                href="https://www.youtube.com/c/pocexperts"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-[#D97706] text-white px-6 py-4 rounded-2xl font-bold hover:scale-[0.98] transition-transform"
+              >
+                Watch POCExperts <i data-lucide="youtube" class="w-5 h-5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Research -->
+      <section id="research" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-5xl font-extrabold mb-4">Research & Publications</h2>
+          <p class="text-xl text-slate-500">Acoustic microscopy, denoising, Nature Scientific Reports & more.</p>
+        </div>
+
+        <div class="space-y-4 max-w-4xl mx-auto">
+          <a
+            href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=B8VoEywAAAAJ&citation_for_view=B8VoEywAAAAJ:jgBuDB5drN8C"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block glass-card rounded-2xl p-6 hover:shadow-xl transition-all group"
+          >
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h4 class="font-bold text-lg mb-1">
+                  Image denoising in acoustic microscopy using block-matching and 4D filter
+                </h4>
+                <p class="text-sm text-[#D97706] font-semibold">Nature Scientific Reports · 2023</p>
+              </div>
+              <i data-lucide="external-link" class="w-5 h-5 text-slate-400 group-hover:text-[#D97706]"></i>
+            </div>
+          </a>
+
+          <a
+            href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=B8VoEywAAAAJ&citation_for_view=B8VoEywAAAAJ:43bX7VzcjpAC"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block glass-card rounded-2xl p-6 hover:shadow-xl transition-all group"
+          >
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h4 class="font-bold text-lg mb-1">Block-matching and 3D filtering-based denoising of acoustic images</h4>
+                <p class="text-sm text-[#D97706] font-semibold">Applied Acoustics · 2024</p>
+              </div>
+              <i data-lucide="external-link" class="w-5 h-5 text-slate-400 group-hover:text-[#D97706]"></i>
+            </div>
+          </a>
+
+          <a
+            href="https://scholar.google.com/citations?hl=en&user=B8VoEywAAAAJ"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block glass-card rounded-2xl p-6 hover:shadow-xl transition-all group"
+          >
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h4 class="font-bold text-lg mb-1">More publications (Journal of Microscopy, AutoSAFT, etc.)</h4>
+                <p class="text-sm text-[#D97706] font-semibold">Google Scholar</p>
+              </div>
+              <i data-lucide="external-link" class="w-5 h-5 text-slate-400 group-hover:text-[#D97706]"></i>
+            </div>
+          </a>
+        </div>
+
+        <div class="text-center mt-10">
+          <a
+            href="https://scholar.google.com/citations?hl=en&user=B8VoEywAAAAJ"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-bold text-[#D97706] inline-flex items-center gap-2 hover:underline"
+            >View all on Google Scholar <i data-lucide="graduation-cap" class="w-5 h-5"></i
+          ></a>
+        </div>
+      </section>
+
+      <!-- How to Work With Me -->
+      <section class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-20">
+          <h2 class="text-5xl font-extrabold mb-4">How to Work With Me</h2>
+          <p class="text-xl text-slate-500">Simple process. Clear scope. Professional delivery.</p>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="relative">
+            <div class="text-[120px] font-extrabold text-slate-50 absolute -top-20 left-0 -z-10">01</div>
+            <h4 class="text-2xl font-bold mb-4">Reach out</h4>
+            <p class="text-slate-600">Email or LinkedIn with your goals, timeline, and constraints.</p>
+          </div>
+
+          <div class="relative">
+            <div class="text-[120px] font-extrabold text-slate-50 absolute -top-20 left-0 -z-10">02</div>
+            <h4 class="text-2xl font-bold mb-4">Align</h4>
+            <p class="text-slate-600">Quick call to confirm scope, architecture, and success metrics.</p>
+          </div>
+
+          <div class="relative">
+            <div class="text-[120px] font-extrabold text-slate-50 absolute -top-20 left-0 -z-10">03</div>
+            <h4 class="text-2xl font-bold mb-4">Contract</h4>
+            <p class="text-slate-600">Clear deliverables, milestones, and communication cadence.</p>
+          </div>
+
+          <div class="relative">
+            <div class="text-[120px] font-extrabold text-slate-50 absolute -top-20 left-0 -z-10">04</div>
+            <h4 class="text-2xl font-bold mb-4">Ship</h4>
+            <p class="text-slate-600">High-quality implementation with documentation and handoff.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Final CTA -->
+      <section class="py-32 px-6">
+        <div class="max-w-7xl mx-auto bg-[#D97706] rounded-[60px] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl">
+          <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M0 0 L100 0 L100 100 Z" fill="white"></path>
+            </svg>
+          </div>
+
+          <div class="relative z-10">
+            <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-8 leading-tight">
+              Ready to ship something great? <br />
+              <span class="text-[#0A2619]">Let’s talk.</span>
+            </h2>
+            <p class="text-white/80 text-xl max-w-2xl mx-auto mb-12 font-medium">
+              Android, NDK/C++, mobile security, or technical leadership. Available for contracts and consulting.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+              <a
+                href="mailto:gptshubham595@gmail.com?subject=Project%20Inquiry"
+                class="bg-[#0A2619] text-white px-10 py-6 rounded-3xl font-bold text-xl hover:scale-105 transition-all shadow-xl"
+                >Email me</a
+              >
+              <a
+                href="https://bit.ly/resumeshubhamola"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-white text-[#0A2619] px-10 py-6 rounded-3xl font-bold text-xl hover:scale-105 transition-all flex items-center justify-center gap-3"
+              >
+                <i data-lucide="file-text" class="w-6 h-6"></i> Download Resume
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <!-- tsparticles library -->
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2/tsparticles.slim.bundle.min.js"></script>
-    <script src="script.js"></script>
-    <script>
-        lucide.createIcons();
-    </script>
-</body>
+    <!-- Footer -->
+    <footer class="bg-[#0A2619] pt-24 pb-12 px-6 text-white/50 border-t border-white/5">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-20">
+        <div class="col-span-2">
+          <div class="flex items-center gap-2 text-white mb-6">
+            <div class="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center">
+              <i data-lucide="code-2" class="w-5 h-5 text-[#D97706]"></i>
+            </div>
+            <span class="text-xl font-bold">Shubham Kumar Gupta</span>
+          </div>
 
+          <p class="max-w-sm text-lg leading-relaxed mb-8">
+            Senior Android/NDK engineer. Performance, real-time audio, and security-first engineering.
+            Available for contract work.
+          </p>
+
+          <div class="flex gap-4">
+            <a
+              href="https://www.linkedin.com/in/shubhamguptaggps"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors"
+              ><i data-lucide="linkedin" class="w-5 h-5"></i
+            ></a>
+            <a
+              href="https://github.com/gptshubham595"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors"
+              ><i data-lucide="github" class="w-5 h-5"></i
+            ></a>
+            <a
+              href="https://www.youtube.com/c/pocexperts"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+              class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors"
+              ><i data-lucide="youtube" class="w-5 h-5"></i
+            ></a>
+            <a
+              href="mailto:gptshubham595@gmail.com?subject=Project%20Inquiry"
+              aria-label="Email"
+              class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors"
+              ><i data-lucide="mail" class="w-5 h-5"></i
+            ></a>
+          </div>
+        </div>
+
+        <div>
+          <h5 class="text-white font-bold mb-6">Quick links</h5>
+          <ul class="space-y-4">
+            <li><a href="#about" class="hover:text-white transition-colors">About</a></li>
+            <li><a href="#experience" class="hover:text-white transition-colors">Experience</a></li>
+            <li><a href="#projects" class="hover:text-white transition-colors">Projects</a></li>
+            <li><a href="#security" class="hover:text-white transition-colors">Security</a></li>
+            <li><a href="#research" class="hover:text-white transition-colors">Research</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="text-white font-bold mb-6">Contact</h5>
+          <ul class="space-y-4">
+            <li>
+              <a
+                href="mailto:gptshubham595@gmail.com?subject=Project%20Inquiry"
+                class="flex items-center gap-3 hover:text-white transition-colors"
+                ><i data-lucide="mail" class="w-4 h-4 flex-shrink-0"></i> gptshubham595@gmail.com</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://bit.ly/resumeshubhamola"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-3 hover:text-white transition-colors"
+                ><i data-lucide="file-text" class="w-4 h-4 flex-shrink-0"></i> Resume</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-sm">
+        <p>© <span id="year"></span> Shubham Kumar Gupta.</p>
+        <a href="#top" class="hover:text-white transition-colors">Back to top</a>
+      </div>
+    </footer>
+
+    <script>
+      // Icons
+      document.addEventListener("DOMContentLoaded", () => {
+        if (window.lucide && typeof window.lucide.createIcons === "function") {
+          window.lucide.createIcons();
+        }
+        document.getElementById("year").textContent = new Date().getFullYear();
+      });
+
+      // Section reveal on scroll (non-hero sections)
+      const observerOptions = { threshold: 0.1 };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("opacity-100", "translate-y-0");
+            entry.target.classList.remove("opacity-0", "translate-y-10");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll("main section").forEach((section, i) => {
+        if (i === 0) return; // hero stays visible
+        section.classList.add("transition-all", "duration-1000", "opacity-0", "translate-y-10");
+        observer.observe(section);
+      });
+    </script>
+  </body>
 </html>
